@@ -27,11 +27,18 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 # Personal aliases
 alias ll='ls -l'
 
-# Prep for compinit, not perfect
-# https://github.com/zsh-users/zsh-completions/issues/680
-compaudit | xargs chmod g-w
-# Completions.
+# Load completions commands without insecure directories
+autoload -Uz compinit && compinit -i
+
+# If compinit will throw the insecure directories message:
+if [ "$(compaudit 2>/dev/null | wc -l | tr -d ' ')" -gt '0' ]; then
+  echo "You can run this to eliminate the compinit warning (https://github.com/zsh-users/zsh-completions/issues/680):"
+  echo "compaudit | xargs chmod g-w\n"
+fi
+
+# Initialize completions
 autoload -Uz compinit && compinit
+
 # Case insensitive.
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
