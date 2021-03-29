@@ -31,9 +31,9 @@ then
 fi
 
 # Allow history search via up/down keys.
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
+# source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+# bindkey "^[[A" history-substring-search-up
+# bindkey "^[[B" history-substring-search-down
 
 # Git aliases.
 alias gs='git status'
@@ -41,6 +41,9 @@ alias gc='git commit'
 alias gp='git pull --rebase'
 alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+# Personal aliases
+alias ll='ls -l'
 
 # Completions.
 autoload -Uz compinit && compinit
