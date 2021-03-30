@@ -49,3 +49,10 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+# Initialize gcloud
+GCLOUD_SDK_ROOT="/usr/local/Caskroom/google-cloud-sdk"
+if [ -d "$GCLOUD_SDK_ROOT" ]; then
+  source "$GCLOUD_SDK_ROOT/latest/google-cloud-sdk/path.zsh.inc"
+  source "$GCLOUD_SDK_ROOT/latest/google-cloud-sdk/completion.zsh.inc"
+fi
