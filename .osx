@@ -111,6 +111,21 @@ fi
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
+# Trackpad: enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Make sure Mission Control/Expose are enabled
+# https://github.com/mrmachine/dotfiles/blob/master/home/bin/osx-defaults.sh#L162
+# [x] App Expose
+defaults write com.apple.dock mcx-expose-disabled -bool FALSE
+defaults write com.apple.dock showAppExposeGestureEnabled -int 1
+
+# Three-finger swipe gesture
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+
 # Increase sound quality for Bluetooth headphones/headsets
 # defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
@@ -315,11 +330,18 @@ fi
 # Set Safari’s home page to `about:blank` for faster loading
 # defaults write com.apple.Safari HomePage -string "about:blank"
 
+# Safari opens with: [All windows from last session]
+defaults write com.apple.Safari AlwaysRestoreSessionAtLaunch -int 1
+
 # Prevent Safari from opening ‘safe’ files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 # Disable Safari’s thumbnail cache for History and Top Sites
+# https://arstechnica.com/information-technology/2021/02/new-browser-tracking-hack-works-even-when-you-flush-caches-or-go-incognito/
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+
+# [ ] Allow websites to ask for permission to send push notifications
+# defaults write com.apple.Safari CanPromptForPushNotifications -int 0
 
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -331,6 +353,14 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+###############################################################################
+# Contacts                                                                    #
+###############################################################################
+
+# Contacts, Preferences, General
+# Sort By: [Given Name]
+defaults write com.apple.AddressBook ABNameSortingFormat 'sortingFirstName sortingLastName'
 
 ###############################################################################
 # Mail                                                                        #
